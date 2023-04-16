@@ -1,0 +1,45 @@
+.wrapper-block {
+  width: 451px;
+  height: 279px;
+  background-color: #b7b7b7;
+  margin-bottom: 37px;
+  margin-right: 36px;
+  display: flex; 
+  flex-wrap: nowrap;
+}
+
+.block-img {
+  width: 183px;
+  height: 279px;
+  margin-right: 20px;
+  background-color: blueviolet;
+}
+.block-img img {
+  width: 183px;
+  height: 279px;
+}
+
+.block-info {
+  position: relative;
+  width: 268px;
+  height: 279px;
+  overflow: hidden;
+  word-wrap: break-word;
+  line-height: 14px;
+}
+.info {
+  font-size: 12px;
+}
+
+.rat{
+  width: 30px; 
+  height: 30px; 
+  border-radius: 50%; 
+  border: 2px solid rgb(219, 252, 31);
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
