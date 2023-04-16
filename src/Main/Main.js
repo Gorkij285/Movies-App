@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Main.css'
 import Block from '../Block/Block.js'
 import { searchMovies } from '../apiFunc/api.js'
-import { Spin, Alert } from 'antd'
+import { Pagination, Spin, Alert } from 'antd'
 
 const MyComponent = () => (
   // <div>  //
@@ -17,7 +17,9 @@ class Main extends Component {
       data: [],
       loading: true,
       error: null,
-      isOffline: false
+      isOffline: false,
+      currentPage: 1,
+      total: 1,
     };
   }
 
@@ -26,13 +28,13 @@ class Main extends Component {
     window.addEventListener('online', this.handleOnline);
     const apiKey = '928ffe3d29017199a700e964c38bdedb'
     let toFind = this.props.findMovie  ? 
-    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(this.props.findMovie)}` :
-    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US`
+    `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(this.props.findMovie)}&page=${this.state.currentPage}` :
+    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${this.state.currentPage}`
     fetch(toFind)
       .then(response => response.json())
       .then(data => {
         if (data && Array.isArray(data.results)) {
-          this.setState({ data: data.results, loading: false, error: null });
+          this.setState({ data: data.results, loading: false, error: null , total: Math.ceil(data.total_results / 20)});
         } else {
           console.error("Invalid data format returned from API.");
           this.setState({ loading: false, error: 'Invalid data format returned from API.' });
@@ -45,16 +47,18 @@ class Main extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.state.currentPage,111111111111111111111111111)
     if (prevProps.findMovie !== this.props.findMovie) {
       const apiKey = '928ffe3d29017199a700e964c38bdedb'
       let toFind = this.props.findMovie ? 
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(this.props.findMovie)}` :
-        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US`
+        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(this.props.findMovie)}&page=${this.state.currentPage}` :
+        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${this.state.currentPage}`
       fetch(toFind)
         .then(response => response.json())
         .then(data => {
           if (data && Array.isArray(data.results)) {
-            this.setState({ data: data.results, loading: false, error: null});
+            console.log('ОБНОВА')
+            this.setState({ data: data.results, loading: false, error: null , total: Math.ceil(data.total_results / 20)});
           } else {
             console.error("Invalid data format returned from API.");
             this.setState({ loading: false, error: 'Invalid data format returned from API.' });
@@ -80,6 +84,12 @@ class Main extends Component {
     this.setState({ isOffline: false });
   }
 
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+    console.log("handlePageChange", page)
+    
+  };
+
 
   render() {
     if (this.state.loading) {
@@ -101,6 +111,8 @@ class Main extends Component {
       return <Alert message="Ошибка" description="Отсутствует интернет-соединение" type="error" />;
     } 
 
+    const { currentPage, total} = this.state;
+    console.log(total,"РЕНДЕР")
     return (
       <section className='Main-section'>
         {this.state.data.map(item => (
@@ -113,6 +125,12 @@ class Main extends Component {
             rating={item.vote_average}
           ></Block>
         ))}
+        <Pagination
+          current={currentPage}
+          total={total}
+          pageSize={20}
+          onChange={this.handlePageChange}
+        />
       </section>
     )
   }
