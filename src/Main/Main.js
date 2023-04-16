@@ -46,9 +46,10 @@ class Main extends Component {
       })
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevState) {
     console.log(this.state.currentPage,111111111111111111111111111)
-    if (prevProps.findMovie !== this.props.findMovie) {
+    console.log(prevState.currentPage,this.state.currentPage)
+    if (prevState.currentPage !== this.state.currentPage) {
       const apiKey = '928ffe3d29017199a700e964c38bdedb'
       let toFind = this.props.findMovie ? 
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(this.props.findMovie)}&page=${this.state.currentPage}` :
@@ -85,10 +86,13 @@ class Main extends Component {
   }
 
   handlePageChange = (page) => {
-    this.setState({ currentPage: page });
+    this.setState(prevState => ({ 
+      currentPage: page 
+    }));
     console.log("handlePageChange", page)
-    
   };
+    
+
 
 
   render() {
