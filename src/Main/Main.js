@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Main.css'
 import Block from '../Block/Block.js'
 import { searchMovies } from '../apiFunc/api.js'
-import { Pagination, Spin, Alert} from 'antd'
+import { Spin, Alert } from 'antd'
 
 const MyComponent = () => (
   // <div>  //
@@ -46,8 +46,8 @@ class Main extends Component {
       })
   }
 
-  componentDidUpdate(prevPr,prevState) {
-    if (prevState.currentPage !== this.state.currentPage) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.findMovie !== this.props.findMovie) {
       const apiKey = '928ffe3d29017199a700e964c38bdedb'
       let toFind = this.props.findMovie ? 
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(this.props.findMovie)}&page=${this.state.currentPage}` :
@@ -127,14 +127,6 @@ class Main extends Component {
             rating={item.vote_average}
           ></Block>
         ))}
-        <Pagination
-          current={currentPage}
-          total={Math.min(total,10000)}
-          pageSize={20}
-          showSizeChanger={false}
-          onChange={this.handlePageChange}
-          hideOnSinglePage={true}
-        />
       </section>
     )
   }
