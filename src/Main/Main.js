@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import './Main.css'
 import Block from '../Block/Block.js'
 import { searchMovies } from '../apiFunc/api.js'
-import { Spin, Alert } from 'antd'
+import { Spin, Alert, Pagination } from 'antd'
 
 const MyComponent = () => (
-  // <div>  //
-    <Spin size="large" tip="Loading..." style={{ margin: 'auto' }} />
-  // /* </div> */
+  <Spin size="large" tip="Loading..." style={{ margin: 'auto' }} />
 );
 
 class Main extends Component {
@@ -46,8 +44,9 @@ class Main extends Component {
       })
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.findMovie !== this.props.findMovie) {
+  componentDidUpdate(prevProps,prevState) {
+    if (prevState.currentPage !== this.state.currentPage || 
+        prevProps.findMovie !== this.props.findMovie) {
       const apiKey = '928ffe3d29017199a700e964c38bdedb'
       let toFind = this.props.findMovie ? 
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(this.props.findMovie)}&page=${this.state.currentPage}` :
@@ -127,6 +126,13 @@ class Main extends Component {
             rating={item.vote_average}
           ></Block>
         ))}
+        <Pagination
+          defaultCurrent={1} 
+          total={Math.min(10000,total)} 
+          pageSize={20} 
+          showSizeChanger={false} 
+          onChange={this.handlePageChange}
+        />
       </section>
     )
   }
