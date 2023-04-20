@@ -1,4 +1,5 @@
-import React,{Component} from 'react'
+import React,{Component} from 'react';
+import { Rate } from 'antd';
 import './Block.css';
 
 async function getData(url) {
@@ -8,6 +9,15 @@ async function getData(url) {
 }
 
 class Block extends Component {
+
+  state = {
+    rating: 0
+  }
+
+  starChange = (value) => {
+    console.log(value)
+  }
+
 
   render () {
     const {title,date,info,poster,rating} = this.props
@@ -40,6 +50,16 @@ class Block extends Component {
            <button>Action</button>
            <button>Drama</button>
            <p className='info'>{shortenText(info)}</p>
+
+            <div className='rate'>
+              <Rate 
+              allowHalf 
+              // defaultValue={rating}
+              count={10}
+              onChange={this.starChange}
+               />
+            </div>
+            
          </div>
       </div>
      )

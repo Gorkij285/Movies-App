@@ -24,7 +24,7 @@ class InputWithState extends Component {
   
   render() {
     return (
-      <div>
+      <div className='search-bar'>
         <Input value={this.state.inputValue} 
         onChange={this.handleInputChange}
         onKeyDown={(e) => {

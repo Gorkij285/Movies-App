@@ -1,8 +1,9 @@
 .Main-section {
-    width: 974px;
+    width: 1200px;
     background-color: #fbe3fa;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     padding-left: 37px;
     margin: 0 auto
 }

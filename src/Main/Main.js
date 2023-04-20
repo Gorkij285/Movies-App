@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import './Main.css'
 import Block from '../Block/Block.js'
 import { searchMovies } from '../apiFunc/api.js'
-import { Pagination, Spin, Alert } from 'antd'
+import { Pagination, Spin, Alert} from 'antd'
 
 const MyComponent = () => (
   // <div>  //
     <Spin size="large" tip="Loading..." style={{ margin: 'auto' }} />
-  /* </div> */
+  // /* </div> */
 );
 
 class Main extends Component {
@@ -46,9 +46,8 @@ class Main extends Component {
       })
   }
 
-  componentDidUpdate(prevProps) {
-    console.log(this.state.currentPage,111111111111111111111111111)
-    if (prevProps.findMovie !== this.props.findMovie) {
+  componentDidUpdate(prevPr,prevState) {
+    if (prevState.currentPage !== this.state.currentPage) {
       const apiKey = '928ffe3d29017199a700e964c38bdedb'
       let toFind = this.props.findMovie ? 
         `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(this.props.findMovie)}&page=${this.state.currentPage}` :
@@ -85,10 +84,13 @@ class Main extends Component {
   }
 
   handlePageChange = (page) => {
-    this.setState({ currentPage: page });
+    this.setState(prevState => ({ 
+      currentPage: page 
+    }));
     console.log("handlePageChange", page)
-    
   };
+    
+
 
 
   render() {
@@ -127,9 +129,11 @@ class Main extends Component {
         ))}
         <Pagination
           current={currentPage}
-          total={total}
+          total={Math.min(total,10000)}
           pageSize={20}
+          showSizeChanger={false}
           onChange={this.handlePageChange}
+          hideOnSinglePage={true}
         />
       </section>
     )

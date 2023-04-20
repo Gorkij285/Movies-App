@@ -1,5 +1,5 @@
 .wrapper-block {
-  width: 451px;
+  width: 555px;
   height: 279px;
   background-color: #b7b7b7;
   margin-bottom: 37px;
@@ -21,7 +21,7 @@
 
 .block-info {
   position: relative;
-  width: 268px;
+  width: 333px;
   height: 279px;
   overflow: hidden;
   word-wrap: break-word;
@@ -37,9 +37,15 @@
   border-radius: 50%; 
   border: 2px solid rgb(219, 252, 31);
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  top: 15px;
+  right: 0px;
   display: flex; 
   justify-content: center; 
   align-items: center;
+}
+
+.rate {
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
 }
