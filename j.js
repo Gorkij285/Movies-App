@@ -10,4 +10,3 @@ var rotate = function(nums, k) {
 };
 console.log(rotate(masss, 3)) //[4,5,6,1,2,3]
 console.log(masss)
-
