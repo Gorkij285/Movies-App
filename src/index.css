@@ -23,6 +23,10 @@ body {
   justify-content: center;
   flex-direction: column;
 }
-input{
+input {
   margin-bottom: 20px;
+}
+.ant-tabs-nav-wrap {
+  display: flex;
+  justify-content: center;
 }

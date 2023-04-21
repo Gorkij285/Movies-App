@@ -1,8 +1,17 @@
 .Main-section {
-    width: 974px;
-    background-color: #fbe3fa;
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 37px;
-    margin: 0 auto
+  width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+}
+.spin {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1275px) {
+  .Main-section {
+    flex-direction: column;
+  }
 }
