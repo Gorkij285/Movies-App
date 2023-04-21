@@ -1,4 +1,5 @@
 .Main-section {
+<<<<<<< HEAD
   width: 1200px;
   display: flex;
   flex-wrap: wrap;
@@ -15,3 +16,13 @@
     flex-direction: column;
   }
 }
+=======
+    width: 1200px;
+    background-color: #fbe3fa;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 37px;
+    margin: 0 auto
+}
+>>>>>>> 90322494beee8bec8f24374a01121b502f4690d3

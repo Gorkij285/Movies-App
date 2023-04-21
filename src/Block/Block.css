@@ -41,8 +41,13 @@
   position: absolute;
   top: 15px;
   right: 0px;
+<<<<<<< HEAD
   display: flex;
   justify-content: center;
+=======
+  display: flex; 
+  justify-content: center; 
+>>>>>>> 90322494beee8bec8f24374a01121b502f4690d3
   align-items: center;
 }
 
@@ -50,6 +55,7 @@
   position: absolute;
   bottom: 10px;
   left: 0px;
+<<<<<<< HEAD
 }
 
 @media (max-width: 650px) {
@@ -60,3 +66,6 @@
     max-width: 100%;
   }
 }
+=======
+}
+>>>>>>> 90322494beee8bec8f24374a01121b502f4690d3

@@ -24,6 +24,7 @@ class InputWithState extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div className="search-bar">
         <Input
           value={this.state.inputValue}
@@ -35,6 +36,17 @@ class InputWithState extends Component {
             }
           }}
         />
+=======
+      <div className='search-bar'>
+        <Input value={this.state.inputValue} 
+        onChange={this.handleInputChange}
+        onKeyDown={(e) => {
+          if (e.keyCode === 13) {
+            e.preventDefault();
+            this.setState({ inputValue: '' });
+          }
+        }} />
+>>>>>>> 90322494beee8bec8f24374a01121b502f4690d3
       </div>
     )
   }
